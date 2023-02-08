@@ -1,4 +1,4 @@
-# The Plow
+# 🚜 The Plow
 
 An efficient Chia Plot mover.
 
