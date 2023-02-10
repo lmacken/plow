@@ -8,6 +8,7 @@ Author: Luke Macken <phorex@protonmail.com>
 SPDX-License-Identifier: GPL-3.0-or-later
 """
 import sys
+import glob
 import shutil
 import random
 import urllib.request
@@ -18,6 +19,8 @@ from datetime import datetime
 from collections import defaultdict
 
 # Local plot sources
+# For wildcards:
+#   SOURCES = glob.glob('/mnt/*')
 SOURCES = []
 
 # Rsync destinations
