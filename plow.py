@@ -35,7 +35,7 @@ SHUFFLE = True
 BWLIMIT = None
 
 # Optionally set the I/O scheduling class and priority
-IONICE = None  # "-c3" for "idle"
+IONICE = None  # "-c 3" for "idle"
 
 # Only send 1 plot at a time, regardless of source/dest. 
 ONE_AT_A_TIME = False
@@ -59,7 +59,7 @@ else:
     RSYNC_FLAGS = "--remove-source-files --preallocate --whole-file"
 
 if IONICE:
-    RSYNC_CMD = "ionice {IONICE} rsync"
+    RSYNC_CMD = f"ionice {IONICE} {RSYNC_CMD}"
 
 LOCK = asyncio.Lock()  # Global ONE_AT_A_TIME lock
 SRC_LOCKS = defaultdict(asyncio.Lock)  # ONE_PER_DRIVE locks
