@@ -53,6 +53,8 @@ RSYNC_CMD = "rsync"
 if SHUFFLE:
     random.shuffle(DESTS)
 
+
+# Rsync parameters. For FAT/NTFS you may need to remove --preallocate
 if BWLIMIT:
     RSYNC_FLAGS = f"--remove-source-files --preallocate --whole-file --bwlimit={BWLIMIT}"
 else:
