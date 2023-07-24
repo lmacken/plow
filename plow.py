@@ -89,7 +89,6 @@ async def plotwatcher(paths, plot_queue, loop):
     await watcher.setup(loop)
     while True:
         event = await watcher.get_event()
-        print(event)
         if event.name.endswith(".plot"):
             plot_path = Path(event.alias) / event.name
             await plot_queue.put(plot_path)
