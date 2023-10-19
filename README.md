@@ -9,4 +9,5 @@ It can do many in parallel, one at a time, one per source, or one per destinatio
 
 ## Known Issues
 
-- We currently depend on `aionotify`, which is broken on python3.11+. See issue#9 for more information.
+- We currently depend on `aionotify`, which is broken on python3.11+. See [issue #9](https://github.com/lmacken/plow/issues/9) for more information.
+
