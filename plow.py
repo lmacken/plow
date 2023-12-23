@@ -165,7 +165,9 @@ async def plow(dest, plot_queue, loop):
                 # Most likely a full drive.
                 print(f"⁉️ {cmd!r} exited with {proc.returncode} (error in file I/O)")
                 await plot_queue.put(plot)
-                print(f"{dest} plow exiting")
+                DESTS.remove(f'{dest}')
+                print(f'Plow removed destination {dest} from DESTS list')
+                print(f'Continue the plowing to this destinations:{DESTS}')
                 break
             else:
                 print(f"⁉️ {cmd!r} exited with {proc.returncode}")
