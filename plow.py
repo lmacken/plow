@@ -14,6 +14,7 @@ import random
 import urllib.request
 import asyncio
 import aionotify
+import os
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -104,8 +105,11 @@ async def plow(dest, plot_queue, loop):
             # For local copies, we can check if there is enough space.
             dest_path = Path(dest)
             if dest_path.exists():
+                # Gets the destination path' mountpoint
+                mount_point = get_mount_point(dest)
+                mount_point_dest = Path(mount_point)
                 # Make sure it's actually a mount, and not our root filesystem.
-                if not dest_path.is_mount():
+                if not mount_point_dest.is_mount():
                     print(f"Farm destination {dest_path} is not mounted. Trying again later.")
                     await plot_queue.put(plot)
                     await asyncio.sleep(SLEEP_FOR)
@@ -182,6 +186,11 @@ async def plow(dest, plot_queue, loop):
         except Exception as e:
             print(f"! {e}")
 
+def get_mount_point(path):
+    path = os.path.abspath(path)
+    while not os.path.ismount(path):
+        path = os.path.dirname(path)
+    return path
 
 async def main(paths, loop):
     plot_queue = asyncio.Queue()
